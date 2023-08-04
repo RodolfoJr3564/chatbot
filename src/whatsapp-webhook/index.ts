@@ -1,1 +1,0 @@
-export { WhatsappWebhookConfigInterface } from "./config"

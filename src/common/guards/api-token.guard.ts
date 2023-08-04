@@ -6,10 +6,9 @@ import {
   BadRequestException,
 } from "@nestjs/common"
 import { ConfigService } from "@nestjs/config"
-import { WhatsappWebhookConfigInterface } from "../../whatsapp-webhook"
 
 @Injectable()
-export class ApiTokenGuard implements CanActivate {
+export class WebhookApiTokenGuard implements CanActivate {
   constructor(private readonly configService: ConfigService) {}
 
   canActivate(context: ExecutionContext): boolean {
@@ -19,10 +18,11 @@ export class ApiTokenGuard implements CanActivate {
 
   validateRequest(req): boolean {
     const { access_token: apiToken } = req.headers
-    const { whatsappBusinessAPIToken } =
-      this.configService.get<WhatsappWebhookConfigInterface>("whatsapp-webhook")
+    const webhookApiToken = this.configService.get<string>(
+      "whatsappAdapter.webhookApiToken",
+    )
     console.log(apiToken)
-    console.log(whatsappBusinessAPIToken)
+    console.log(webhookApiToken)
 
     // if (!requestToken) {
     //   throw new BadRequestException("No token provided")

@@ -1,15 +1,36 @@
 import { Injectable } from "@nestjs/common"
-import { ConfigService } from "@nestjs/config"
+import { Queue } from "bull"
+import { InjectQueue } from "@nestjs/bull"
+import { SendWhatsappTextMessage } from "../types"
 
 @Injectable()
 export class ChatbotService {
-  constructor(private readonly configService: ConfigService) {}
+  // constructor(
+  //   @InjectQueue("send-messages")
+  //   private readonly sendMessageQueue: Queue,
+  // ) {}
 
-  send_message(): string {
-    return "Hello World!"
-  }
+  // async replyMessage(data) {
+  //   // const clientData = await this.requestClientData(data)
+  //   // const clientResponse = await this.buildClientResponse({ isApproved: true })
+  //   console.log(data)
+  //   await this.sendMessageQueue.add("send-whatsapp-message", {
 
-  handle_response(): string {
-    return "Hello World!"
+  //   })
+  // }
+
+  // async requestClientData(data): Promise<string> {
+  //   // TODO: Busca nas apis internas informações do cliente
+  //   // TODO: Trata dados e retorna
+  //   return "Hello World!"
+  // }
+
+  async buildClientResponse(data: {
+    clientId: string
+    message: string
+  }): Promise<SendWhatsappTextMessage> {
+    // TODO: Le o template de resposta do cliente me Markdown
+    // TODO: Monta mensagem
+    return data
   }
 }

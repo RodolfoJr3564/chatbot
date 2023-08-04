@@ -1,1 +1,1 @@
-export { ApiTokenGuard } from "./guards/api-token.guard"
+export { WebhookApiTokenGuard } from "./guards/api-token.guard"

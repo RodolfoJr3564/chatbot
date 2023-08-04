@@ -1,0 +1,8 @@
+version: "3.1"
+services:
+  redis:
+    image: "redis:latest"
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    environment:
+      - REDIS_HOST=${REDIS_HOST}
