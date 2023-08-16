@@ -22,7 +22,9 @@ import { ConfigurationsInterface } from "../../config"
     }),
     BullModule.registerQueue(
       { name: "receive-message" },
+      { name: "receive-message-fallback" },
       { name: "send-messages" },
+      // TODO: { name: "send-messages-fallback" },
     ),
   ],
   exports: [BullModule],

@@ -2,8 +2,8 @@ import {
   Injectable,
   CanActivate,
   ExecutionContext,
-  UnauthorizedException,
   BadRequestException,
+  UnauthorizedException,
 } from "@nestjs/common"
 import { ConfigService } from "@nestjs/config"
 
@@ -21,17 +21,14 @@ export class WebhookApiTokenGuard implements CanActivate {
     const webhookApiToken = this.configService.get<string>(
       "whatsappAdapter.webhookApiToken",
     )
-    console.log(apiToken)
-    console.log(webhookApiToken)
 
-    // if (!requestToken) {
-    //   throw new BadRequestException("No token provided")
-    // }
+    if (!apiToken) {
+      throw new BadRequestException("No token provided")
+    }
 
-    // if (requestToken !== whatsappBusinessAPIToken) {
-    //   throw new UnauthorizedException("Invalid token")
-    // }
-
+    if (apiToken !== webhookApiToken) {
+      throw new UnauthorizedException("Invalid token")
+    }
     return true
   }
 }

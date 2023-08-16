@@ -1,14 +1,14 @@
 import { Processor, Process } from "@nestjs/bull"
 import { ChatbotService } from "../../chatbot"
-import { WhatsappWebhookService } from "../webhook/webhook.service"
-import { WhatsappAdapterService } from "whatsapp-adapter"
+import { WhatsappWebhookProducer } from "./whatsapp-message.producer"
+import { WhatsappAdapterService } from "../../whatsapp-adapter"
 import { ReceivedWhatsappMessageJob } from "../../types"
 
 @Processor("receive-message")
 export class ReceivedMessageConsumer {
   constructor(
     private readonly chatbotService: ChatbotService,
-    private readonly webhookService: WhatsappWebhookService,
+    private readonly webhookService: WhatsappWebhookProducer,
     private readonly whatsappAdapterService: WhatsappAdapterService,
   ) {}
 

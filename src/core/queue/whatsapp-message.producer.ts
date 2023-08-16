@@ -4,7 +4,7 @@ import { Queue } from "bull"
 import { ReceivedWhatsappMessage, SendWhatsappTextMessage } from "../../types"
 
 @Injectable()
-export class WhatsappWebhookService {
+export class WhatsappWebhookProducer {
   constructor(
     @InjectQueue("receive-message")
     private readonly receiveMessageQueue: Queue,

@@ -1,3 +1,6 @@
 export * from "./queues.module"
 export * from "./receive-message.consumer"
 export * from "./send-message.consumer"
+export * from "./whatsapp-message.producer"
+export * from "./receive-message-fallback.consumer"
+export * from "./receive-message-fallback.producer"

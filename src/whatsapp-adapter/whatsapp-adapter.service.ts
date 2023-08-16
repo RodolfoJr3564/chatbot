@@ -1,5 +1,5 @@
 import { HttpService } from "@nestjs/axios"
-import { BadRequestException, Injectable } from "@nestjs/common"
+import { Injectable } from "@nestjs/common"
 import { ConfigService } from "@nestjs/config"
 import { ConfigurationsInterface } from "config/configurations.interface"
 import { SendWhatsappTextMessage } from "types"
@@ -13,24 +13,12 @@ export class WhatsappAdapterService {
     private readonly httpService: HttpService,
   ) {}
 
-  async handleReceivedMessage(data: ReceivedWhatsappMessage) {
-    // TODO: Verifica o tipo de mensagem recebida
-    // TODO: Trata mensagem recebida ou sobe um erro que envia um feedback para o usuário
-
-    const type = data.messages[0].type as "text"
-
-    if (type !== "text") {
-      throw new BadRequestException("Tipo de mensagem não suportado")
-    }
-
-    const {
-      [type]: { body },
-      from,
-    } = data.messages[0]
+  async handleReceivedMessage({ messages }: ReceivedWhatsappMessage) {
+    const [firstMessage] = messages
 
     return {
-      clientId: from,
-      message: body,
+      clientId: firstMessage.from,
+      message: firstMessage[firstMessage.type].body,
     }
   }
 

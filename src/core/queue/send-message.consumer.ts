@@ -10,8 +10,6 @@ export class SendMessageConsumer {
 
   @Process("send-whatsapp-message")
   async processWhatsappMessage(job: SendWhatsappTextMessageJob) {
-    console.log("respondendo: ")
-    console.log(job.data)
     await this.whatsappAdapterService.sendTextMessage(job.data)
   }
 }

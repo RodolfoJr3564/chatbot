@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common"
 import { Queue } from "bull"
 import { InjectQueue } from "@nestjs/bull"
-import { SendWhatsappTextMessage } from "../types"
+import { FallbackType, SendWhatsappTextMessage } from "../types"
 
 @Injectable()
 export class ChatbotService {
@@ -13,7 +13,6 @@ export class ChatbotService {
   // async replyMessage(data) {
   //   // const clientData = await this.requestClientData(data)
   //   // const clientResponse = await this.buildClientResponse({ isApproved: true })
-  //   console.log(data)
   //   await this.sendMessageQueue.add("send-whatsapp-message", {
 
   //   })
@@ -31,6 +30,18 @@ export class ChatbotService {
   }): Promise<SendWhatsappTextMessage> {
     // TODO: Le o template de resposta do cliente me Markdown
     // TODO: Monta mensagem
+
     return data
+  }
+
+  async buildClientFallbackResponse(
+    data: FallbackType,
+  ): Promise<SendWhatsappTextMessage> {
+    // TODO: Le o template de resposta do cliente me Markdown
+    // TODO: Monta mensagem
+    return {
+      clientId: data.from,
+      message: "Tipo de mensagem inválida",
+    }
   }
 }
