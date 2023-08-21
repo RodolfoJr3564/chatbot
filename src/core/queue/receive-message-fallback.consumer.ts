@@ -1,7 +1,7 @@
 import { Processor, Process } from "@nestjs/bull"
 import { ChatbotService } from "../../chatbot"
 import { WhatsappWebhookProducer } from "./whatsapp-message.producer"
-import { FallbackJobType } from "../../types"
+import { FallbackJobType } from "../../../types"
 
 @Processor("receive-message-fallback")
 export class ReceivedMessageFallbackConsumer {

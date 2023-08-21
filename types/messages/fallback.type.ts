@@ -1,4 +1,4 @@
-import { FallbackExceptionTypeEnum, MessageTypeEnum } from "../../core"
+import { FallbackExceptionTypeEnum, MessageTypeEnum } from "../../src/core"
 
 export interface FallbackType {
   from: string

@@ -1,10 +1,13 @@
 import { HttpService } from "@nestjs/axios"
 import { Injectable } from "@nestjs/common"
 import { ConfigService } from "@nestjs/config"
-import { ConfigurationsInterface } from "config/configurations.interface"
-import { SendWhatsappTextMessage } from "types"
+import { ConfigurationsInterface } from "../../config/configurations.interface"
+import {
+  SendWhatsappTextMessage,
+  ReceivedWhatsappMessageType,
+  TextMessage,
+} from "../../types"
 import { TextMessageBuilder } from "./message-builder/message.builder"
-import { ReceivedWhatsappMessage, TextMessage } from "../types"
 
 @Injectable()
 export class WhatsappAdapterService {
@@ -13,7 +16,7 @@ export class WhatsappAdapterService {
     private readonly httpService: HttpService,
   ) {}
 
-  async handleReceivedMessage({ messages }: ReceivedWhatsappMessage) {
+  async handleReceivedMessage({ messages }: ReceivedWhatsappMessageType) {
     const [firstMessage] = messages
 
     return {

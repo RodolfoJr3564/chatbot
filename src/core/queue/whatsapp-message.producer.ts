@@ -1,7 +1,10 @@
 import { Injectable } from "@nestjs/common"
 import { InjectQueue } from "@nestjs/bull"
 import { Queue } from "bull"
-import { ReceivedWhatsappMessage, SendWhatsappTextMessage } from "../../types"
+import {
+  ReceivedWhatsappMessageType,
+  SendWhatsappTextMessage,
+} from "../../../types"
 
 @Injectable()
 export class WhatsappWebhookProducer {
@@ -12,7 +15,7 @@ export class WhatsappWebhookProducer {
     private readonly sendMessageQueue: Queue,
   ) {}
 
-  async receiveMessage(data: ReceivedWhatsappMessage) {
+  async receiveMessage(data: ReceivedWhatsappMessageType) {
     await this.receiveMessageQueue.add("receive-whatsapp-message", data)
   }
 

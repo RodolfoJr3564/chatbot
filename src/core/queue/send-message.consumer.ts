@@ -1,6 +1,6 @@
 import { Processor, Process } from "@nestjs/bull"
 import { WhatsappAdapterService } from "../../whatsapp-adapter"
-import { SendWhatsappTextMessageJob } from "types/jobs/send-whatsapp-message-job.type"
+import { SendWhatsappTextMessageJob } from "../../../types/jobs/send-whatsapp-message-job.type"
 
 @Processor("send-messages")
 export class SendMessageConsumer {

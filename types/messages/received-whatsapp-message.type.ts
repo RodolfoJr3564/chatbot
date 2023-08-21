@@ -11,7 +11,7 @@ export interface ReceivedWhatsappMessageMessagesParameters {
   type: string
 }
 
-export interface ReceivedWhatsappMessage {
+export interface ReceivedWhatsappMessageType {
   contacts: ReceivedWhatsappMessageContactsParameters[]
   messages: ReceivedWhatsappMessageMessagesParameters[]
 }

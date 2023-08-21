@@ -11,7 +11,7 @@ import {
   ReceivedMessageFallbackConsumer,
 } from "./core"
 import { ChatbotModule } from "./chatbot"
-import { configurations } from "./config"
+import { configurations } from "../config"
 import { WhatsappAdapterModule } from "./whatsapp-adapter"
 
 @Module({

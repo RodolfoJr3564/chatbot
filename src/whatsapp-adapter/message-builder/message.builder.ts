@@ -1,5 +1,5 @@
-import { MessageType } from "../../types"
-import { MessageObjectType, TextMessage } from "types/messages"
+import { MessageType } from "../../../types"
+import { MessageObjectType, TextMessage } from "../../../types/messages"
 
 interface MessageBuilder {
   toObject: () => TextMessage

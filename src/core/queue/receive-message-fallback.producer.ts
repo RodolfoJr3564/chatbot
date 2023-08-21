@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common"
 import { InjectQueue } from "@nestjs/bull"
 import { Queue } from "bull"
-import { FallbackType } from "../../types"
+import { FallbackType } from "../../../types"
 
 @Injectable()
 export class ReceivedMessageFallbackProducer {

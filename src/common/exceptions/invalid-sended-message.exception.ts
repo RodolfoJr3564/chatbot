@@ -4,7 +4,7 @@ import {
   HttpStatus,
 } from "@nestjs/common"
 import { FallbackExceptionTypeEnum, MessageTypeEnum } from "core"
-import { FallbackType } from "../../types"
+import { FallbackType } from "../../../types"
 
 export class InvalidSendedMessageTypeException extends BadRequestException {
   readonly from: string

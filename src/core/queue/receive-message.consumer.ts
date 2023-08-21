@@ -2,7 +2,7 @@ import { Processor, Process } from "@nestjs/bull"
 import { ChatbotService } from "../../chatbot"
 import { WhatsappWebhookProducer } from "./whatsapp-message.producer"
 import { WhatsappAdapterService } from "../../whatsapp-adapter"
-import { ReceivedWhatsappMessageJob } from "../../types"
+import { ReceivedWhatsappMessageJob } from "../../../types"
 
 @Processor("receive-message")
 export class ReceivedMessageConsumer {

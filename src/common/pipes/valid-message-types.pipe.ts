@@ -4,7 +4,7 @@ import {
   applyDecorators,
   UsePipes,
 } from "@nestjs/common"
-import { ParameterType } from "../../types"
+import { ParameterType } from "../../../types"
 import { InvalidSendedMessageTypeException } from "../exceptions/invalid-sended-message.exception"
 import { FallbackExceptionTypeEnum, MessageTypeEnum } from "../../core"
 
