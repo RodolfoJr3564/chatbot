@@ -13,11 +13,13 @@ export class WebhookApiTokenGuard implements CanActivate {
 
   canActivate(context: ExecutionContext): boolean {
     const request = context.switchToHttp().getRequest()
+
     return this.validateRequest(request)
   }
 
   validateRequest(req): boolean {
     const { access_token: apiToken } = req.headers
+
     const webhookApiToken = this.configService.get<string>(
       "whatsappAdapter.webhookApiToken",
     )
@@ -29,6 +31,7 @@ export class WebhookApiTokenGuard implements CanActivate {
     if (apiToken !== webhookApiToken) {
       throw new UnauthorizedException("Invalid token")
     }
+
     return true
   }
 }

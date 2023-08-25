@@ -1,10 +1,8 @@
 import { Body, Controller, Post, UseFilters, UseGuards } from "@nestjs/common"
-import { WhatsappWebhookProducer } from "./queue"
-import {
-  WebhookApiTokenGuard,
-  SupportedMessageTypes,
-  CustomExceptionFilter,
-} from "../common"
+import { WhatsappWebhookProducer } from "./queue/whatsapp-message.producer"
+import { WebhookApiTokenGuard } from "../common/guards/api-token.guard"
+import { CustomExceptionFilter } from "../common/filters/http-exception.filter"
+import { SupportedMessageTypes } from "../common/pipes/valid-message-types.pipe"
 import { MessageTypeEnum } from "../core/message-type.enum"
 
 @Controller("webhooks")

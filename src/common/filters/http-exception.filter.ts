@@ -6,7 +6,7 @@ import {
 } from "@nestjs/common"
 import { InvalidSendedMessageTypeException } from "../exceptions/invalid-sended-message.exception"
 import { Response } from "express"
-import { ReceivedMessageFallbackProducer } from "../../core"
+import { ReceivedMessageFallbackProducer } from "../../core/queue/receive-message-fallback.producer"
 
 @Catch(HttpException)
 export class CustomExceptionFilter implements ExceptionFilter {

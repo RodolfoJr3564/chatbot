@@ -1,7 +1,7 @@
 import { Test, TestingModule } from "@nestjs/testing"
 import { WhatsappWebhookProducer } from "../../../src/core"
 import { whatsappMessageReceived } from "../../helper/whatsapp-message-received"
-import { MockBullModule } from "../../mock"
+import { MockBullModule, queuesMockBuild } from "../../mock"
 import { Queue } from "bull"
 
 describe("WhatsappWebhookProducer", () => {
@@ -10,33 +10,16 @@ describe("WhatsappWebhookProducer", () => {
   let mockSendMessageQueue: jest.Mocked<Queue>
 
   beforeEach(async () => {
-    const mockedReceiveMessageQueue = {
-      name: "BullQueue_receive-message",
-      useFactory: {
-        add: jest.fn(),
-      },
-    }
-
-    const mockedSendMessageQueue = {
-      name: "BullQueue_send-messages",
-      useFactory: {
-        add: jest.fn(),
-      },
-    }
-
+    const queueMock = queuesMockBuild("receive-message", "send-messages")
     const module: TestingModule = await Test.createTestingModule({
-      imports: [
-        MockBullModule.forRootAsync(
-          mockedReceiveMessageQueue,
-          mockedSendMessageQueue,
-        ),
-      ],
+      imports: [MockBullModule.forRootAsync(...queueMock)],
       providers: [WhatsappWebhookProducer],
     }).compile()
-
     producer = module.get<WhatsappWebhookProducer>(WhatsappWebhookProducer)
-    mockReceiveMessageQueue = module.get(mockedReceiveMessageQueue.name)
-    mockSendMessageQueue = module.get(mockedSendMessageQueue.name)
+
+    const [receiveMessage, sendMessageQueue] = queueMock
+    mockReceiveMessageQueue = module.get(receiveMessage.name)
+    mockSendMessageQueue = module.get(sendMessageQueue.name)
   })
 
   it("should add message to receiveMessageQueue", async () => {

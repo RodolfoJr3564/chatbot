@@ -4,24 +4,25 @@ import {
   applyDecorators,
   UsePipes,
 } from "@nestjs/common"
-import { ParameterType } from "../../../types"
 import { InvalidSendedMessageTypeException } from "../exceptions/invalid-sended-message.exception"
-import { FallbackExceptionTypeEnum, MessageTypeEnum } from "../../core"
+import { FallbackExceptionTypeEnum } from "../../core/fallback/fallback-exception-type.enum"
+import { MessageTypeEnum } from "../../core/message-type.enum"
 
 @Injectable()
 export class ValidateMessageTypePipe implements PipeTransform {
-  constructor(private readonly allowedTypes: ParameterType[]) {}
+  constructor(private readonly allowedTypes: MessageTypeEnum[]) {}
 
   async transform(data: {
-    messages: Array<{ type: MessageTypeEnum.TEXT; from: string }>
+    messages: Array<{ type: MessageTypeEnum; from: string }>
   }) {
-    const [firstMessage] = data.messages
+    const messages = data?.messages || []
+    const [firstMessage] = messages
 
-    if (!this.allowedTypes.includes(firstMessage.type)) {
+    if (!firstMessage || !this.allowedTypes.includes(firstMessage?.type)) {
       throw new InvalidSendedMessageTypeException({
         message: "Unsupported message type",
-        from: firstMessage.from,
-        messageType: firstMessage.type,
+        from: firstMessage?.from,
+        messageType: firstMessage?.type,
         exceptionType: FallbackExceptionTypeEnum.INVALID_WHATSAPP_MESSAGE_TYPE,
       })
     }
@@ -30,6 +31,6 @@ export class ValidateMessageTypePipe implements PipeTransform {
   }
 }
 
-export function SupportedMessageTypes(...allowedTypes: ParameterType[]) {
+export function SupportedMessageTypes(...allowedTypes: MessageTypeEnum[]) {
   return applyDecorators(UsePipes(new ValidateMessageTypePipe(allowedTypes)))
 }

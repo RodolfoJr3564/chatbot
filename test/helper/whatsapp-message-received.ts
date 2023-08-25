@@ -1,4 +1,5 @@
-import { ReceivedWhatsappMessageType } from "../../types"
+import { MessageTypeEnum } from "../../src/core/message-type.enum"
+import { ReceivedWhatsappMessageType } from "../../types/messages/received-whatsapp-message.type"
 
 export const whatsappMessageReceived: (
   data?: Partial<ReceivedWhatsappMessageType>,
@@ -24,7 +25,7 @@ export const whatsappMessageReceived: (
       text: {
         body: "text",
       },
-      type: "text",
+      type: MessageTypeEnum.TEXT,
     },
   ],
   ...data,
