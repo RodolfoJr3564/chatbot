@@ -6,9 +6,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule)
   const configService = app.get(ConfigService)
   const port = configService.get<number>("port")
-
-  await app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
+  const host = configService.get<string>("host")
+  await app.listen(+port, () => {
+    console.log(`Server is running on  http://${host}:${port}`)
   })
 }
 
