@@ -1,51 +1,12 @@
-UPDATE YOUR VERIFY TOKEN
-This will be the Verify Token value when you set up webhook
-You need this URL to setup webhook initially.
-get /webhook
-VERIFY_TOKEN
+# WhatsApp Chatbot Adapter
 
-## Installation
+Este projeto é um adaptador de chatbot que utiliza as APIs oficiais do WhatsApp para envio de mensagens. Ele é construído com NestJS, oferecendo suporte a filas e persistência, tornando-o escalável e eficiente para gerenciar conversas automatizadas.
 
-```bash
-$ npm install
-```
+Está funcionando! Porém não foi concluído pois alterei o foco para outro projeto que utiliza as apis não oficiais do Whatsapp permitindo uso sem custos.
 
-## Running the app
+## Funcionalidades
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- **Envio de Mensagens:** Integração direta com as APIs oficiais do WhatsApp.
+- **Filas:** Gerenciamento de mensagens através do Bull para garantir a entrega e processamento em ordem.
+- **Persistência:** Armazenamento de mensagens e estados de conversas para recuperação posterior.
+- **Escalabilidade:** Estrutura modular que permite fácil expansão e manutenção.
